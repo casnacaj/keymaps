@@ -13,6 +13,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ^!Down::Send {End}
 !BS::Del
 
+; Disable Ctrl+Alt+Left/Right in Windows - will rotate screen, blah!
+^!Left::Send {Left}
+^!Right::Send {Right}
+
 ; Add missing Chromebook keys ;-)
 ; Del is at position of lock key, so it may not be used. Use Ctrl+Alt+BckSpc
 ; Ctrl+Del or Ctrl+Alt+BckSpc - Ins
@@ -41,3 +45,8 @@ Volume_Up::F8
 ^+F6::SendInput {Volume_Mute}
 ^+F7::SendInput {Volume_Down}
 ^+F8::SendInput {Volume_Up}
+
+; Remap both win keys to Alt (there are too close to my Alt buttons
+; and it is very annoying).
+RWin::Alt
+LWin::Alt
