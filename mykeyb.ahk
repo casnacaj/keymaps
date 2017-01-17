@@ -5,10 +5,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; Remap missing keys to Chromebook mappings.
 ; Alt+Up - PgUp, Alt+Down - PgDn
-; Ctrl+Alt+Up - Homw, Ctrl+Alt+Down - End
+; Ctrl+Alt+Up - Home, Ctrl+Alt+Down - End
 ; Alt+BckSpc - delete next
-!Up::PgUp
-!Down::PgDn
+!Up::Send {PgUp}
+!Down::Send {PgDn}
 ^!Up::Send {Home}
 ^!Down::Send {End}
 !BS::Del
