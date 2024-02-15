@@ -28,11 +28,11 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 Browser_Home::F1
 Browser_Search::F2
 Media_Prev::F3
-#IfWinActive ahk_exe Teams.exe
-Media_Play_Pause::^+M
-#IfWinNotActive ahk_exe Teams.exe
+; #IfWinActive ahk_exe Teams.exe
+; Media_Play_Pause::^+M
+; #IfWinNotActive ahk_exe Teams.exe
 Media_Play_Pause::F4
-#IfWinActive
+; #IfWinActive
 Media_Next::F5
 Volume_Mute::F6
 Volume_Down::F7
