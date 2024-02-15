@@ -23,10 +23,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ^!BS::Ins
 !Del::Ins
 
-; Use Ctrl+M to switch to virtual Xubuntu session.
-; #WinActivateForce
-; ^M::WinActivate, Xubuntu
-
 ; Remap Mac BT keyboard - remap media/browser buttons to F-keys,
 ; remap Ctrl+Shift+Fn to media/browser buttons.
 Browser_Home::F1
@@ -41,31 +37,13 @@ Media_Next::F5
 Volume_Mute::F6
 Volume_Down::F7
 Volume_Up::F8
-; ^+F1::SendInput {Browser_Home}
-; ^+F2::SendInput {Browser_Search}
-; ^+F3::SendInput {Media_Prev}
-; ^+F4::SendInput {Media_Play_Pause}
-; ^+F5::SendInput {Media_Next}
-^+F6::SendInput {Volume_Mute}
-^+F7::SendInput {Volume_Down}
-^+F8::SendInput {Volume_Up}
 
 ; Remap both win keys to Alt (there are too close to my Alt buttons
 ; and it is very annoying).
-RWin::Alt
-LWin::Alt
+RWin::Return
+LWin::Return
 
-; SC022::^+M
-
-; Alt+Shift+Space: toggle Czech and english-US keyboard
-!+Space::
-KEYB__V++
-KEYB__M:=mod(KEYB__V,2)
-if KEYB__M=1
-   SetDefaultKeyboard(0x10405) ; Czech
-else
-   SetDefaultKeyboard(0x0409) ; english-US
-return
+; toggle keyboard
 SetDefaultKeyboard(LocaleID){
 	Global
 	SPI_SETDEFAULTINPUTLANG := 0x005A
@@ -79,4 +57,20 @@ SetDefaultKeyboard(LocaleID){
 		PostMessage 0x50, 0, %Lan%, , % "ahk_id " windows%A_Index%
 	}
 }
+ToggleKeyb(){
+static KEYB__V := 0
+KEYB__V++
+KEYB__M:=mod(KEYB__V,2)
+if KEYB__M=1
+   SetDefaultKeyboard(0x10405) ; Czech
+else 
+   SetDefaultKeyboard(0x0409) ; english-US
 return
+}
+
+; Alt+Shift+Space or Ctrl+Shift+Space: toggle Czech and english-US keyboard
+#IfWinNotActive ahk_exe VirtualBoxVM.exe
+!+Space::ToggleKeyb()
+#IfWinNotActive ahk_exe VirtualBoxVM.exe
+^+Space::ToggleKeyb()
+
